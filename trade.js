@@ -41,17 +41,17 @@ function createMessage(have, want, bottomText){
         return undefined
     }
     //Creates the message
-    msg = "```css\n--------------[HAVE]--------------{}--------------[WANT]--------------\n                                  {}                                  \n"
+    msg = "```css\n----------------------[HAVE]----------------------{}----------------------[WANT]----------------------\n                                                  {}                                                  \n"
     for (let i=0; i<have.items.length; i++) {
-        msg+="     "
+        msg+="   "
         msg+=`[H] ${have.items[i]}`
-        for (s=0; s<29-(have.items[i].length+4); s++) {
+        for (s=0; s<50-(have.items[i].length+7); s++) {
             msg += " "
         }
         msg += "{}"
-        msg+="     "
+        msg+="   "
         msg+=`[W] ${want.items[i]}`
-        for (s; s<29-(want.items[i].length)+4; s++) {
+        for (s; s<50-(want.items[i].length)+7; s++) {
             msg += " "
         }
         msg+="\n"
@@ -59,7 +59,7 @@ function createMessage(have, want, bottomText){
     }
     //Adds a text in the bottom if you wish
     if (bottomText != undefined){
-        msg+=`                          ${bottomText}\n`
+        msg+=`                                            ${bottomText}\n`
     }
     msg +="```"
     return msg
