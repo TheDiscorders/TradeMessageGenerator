@@ -1,4 +1,10 @@
 /**
+ * This module helps you to create trade messages for Rocket League in Discord servers using code blocks
+ * 
+ * Author : Firokat
+ */
+
+/**
  * @description A list of items you have
  * @param {Array} items The items you have
  */
@@ -25,6 +31,7 @@ class Want{
  * @param {String} bottomText A text you can add in the list row
  */
 function createMessage(have, want, bottomText){
+    // Checks if all parameters are ok
     if (have instanceof Have == false || want instanceof Want == false){
         console.error("One of the element is not of the right type")
         return undefined
@@ -33,32 +40,34 @@ function createMessage(have, want, bottomText){
         console.error("The two arrays have different length")
         return undefined
     }
+    //Creates the message
     msg = "```css\n--------------[HAVE]--------------{}--------------[WANT]--------------\n                                  {}                                  \n"
     for (let i=0; i<have.items.length; i++) {
-        let s
-        for (s=0; s<(34-(have.items[i].length)/2); s++){
-            msg += " "
-        }
-        msg+=`[H]${have.items[i]}`
-        for (let j=0; j<s; j++) {
+        msg+="     "
+        msg+=`[H] ${have.items[i]}`
+        for (s=0; s<29-(have.items[i].length+4); s++) {
             msg += " "
         }
         msg += "{}"
-        for (s=0; s<(34-(want.items[i].length)/2); s++){
-            msg += " "
-        }
-        msg+=`[W]${want.items[i]}`
-        for (let j=0; j<s; j++) {
+        msg+="     "
+        msg+=`[W] ${want.items[i]}`
+        for (s; s<29-(want.items[i].length)+4; s++) {
             msg += " "
         }
         msg+="\n"
         
     }
+    //Adds a text in the bottom if you wish
+    if (bottomText != undefined){
+        msg+=`                          ${bottomText}\n`
+    }
     msg +="```"
     return msg
 }
 
-let have = new Have(["120c", "absc"])
-let want = new Want(["200c", "bnxcc"])
-//let want = "djioqp"
-console.log(createMessage(have, want))
+
+module.exports = {
+    Have,
+    Want,
+    createMessage
+}
